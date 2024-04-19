@@ -227,6 +227,14 @@ function renderVeiculo(data) {
           <td>Preço Médio</td>
           <td>${Valor}</td>
         </tr>
+        <tr>
+          <td>Preço FIXO</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Preço VARIÁVEL</td>
+          <td></td>
+        </tr>
       </tbody>
     </table>
     ${

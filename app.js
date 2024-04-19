@@ -232,14 +232,37 @@ function renderVeiculo(data) {
         </tr>
         <tr>
           <td>Preço FIXO</td>
-          <td>${formattedPrice}</td>
+          <td id="preco-plano-1"></td>
         </tr>
         <tr>
           <td>Preço VARIÁVEL</td>
-          <td>${formattedPrice}</td>
+          <td id="preco-plano-2"></td>
         </tr>
       </tbody>
     </table>  
+
+resultado.innerHTML = result;
+
+$.ajax({
+  url: `https://mobillebff-staging.oontech.app/plans/planQuote/value/${formattedPrice}`,
+  type: 'GET',
+  contentType: 'application/json',
+  headers: { 'x-api-key': '01925cf9-615a-4b2d-8a10-48c56ae47b72' },
+  success: function(planResponse) {
+    console.log("Plan quote value received", planResponse);
+    planResponse.forEach(plan => {
+      if (plan.priceType === "FIXO") {
+        $('#preco-plano-1').text(formatToBrazilianReais(plan.baseValue));
+      } else if (plan.priceType === "VARIAVEL") {
+        $('#preco-plano-2').text(formatToBrazilianReais(plan.baseValue));
+      }
+    });
+    resultado.scrollIntoView({ behavior: "smooth" });
+  },
+  error: function(planXhr, planStatus, planError) {
+    console.error("Error fetching plan quote value", planError);
+  }
+});    
     ${
       referenciaHistorico &&
       `

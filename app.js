@@ -240,35 +240,35 @@ function renderVeiculo(data) {
         </tr>
       </tbody>
     </table>
-`;
+// `;
 
-  resultado.innerHTML = result;
+//   resultado.innerHTML = result;
 
-  // Chamada AJAX para buscar os valores de FIXO e VARIÁVEL
-  $.ajax({
-    url: `https://mobillebff-staging.oontech.app/plans/planQuote/value/${formattedPrice}`,
-    type: 'GET',
-    contentType: 'application/json',
-    headers: { 'x-api-key': '01925cf9-615a-4b2d-8a10-48c56ae47b72' },
-    success: function(planResponse) {
-        console.log("Plan quote value received", planResponse);
+//   // Chamada AJAX para buscar os valores de FIXO e VARIÁVEL
+//   $.ajax({
+//     url: `https://mobillebff-staging.oontech.app/plans/planQuote/value/${formattedPrice}`,
+//     type: 'GET',
+//     contentType: 'application/json',
+//     headers: { 'x-api-key': '01925cf9-615a-4b2d-8a10-48c56ae47b72' },
+//     success: function(planResponse) {
+//         console.log("Plan quote value received", planResponse);
 
-        planResponse.forEach(plan => {
-            if(plan.priceType === "FIXO") {
-                $('#preco-plano-1').text(formatToBrazilianReais(plan.baseValue));
-            } else if(plan.priceType === "VARIAVEL") {
-                $('#preco-plano-2').text(formatToBrazilianReais(plan.baseValue));
-                $('#preco-plano-3').text('+ '+formatToBrazilianReais(plan.totalValuePerKm)+' por km rodado (no mês)');
-            }
-        });
+//         planResponse.forEach(plan => {
+//             if(plan.priceType === "FIXO") {
+//                 $('#preco-plano-1').text(formatToBrazilianReais(plan.baseValue));
+//             } else if(plan.priceType === "VARIAVEL") {
+//                 $('#preco-plano-2').text(formatToBrazilianReais(plan.baseValue));
+//                 $('#preco-plano-3').text('+ '+formatToBrazilianReais(plan.totalValuePerKm)+' por km rodado (no mês)');
+//             }
+//         });
 
-        resultado.scrollIntoView({ behavior: "smooth" }); // Ensure the table is in view after updating
-    },
-    error: function(planXhr, planStatus, planError) {
-        console.error("Error fetching plan quote value", planError);
-    }
-  });
-}    
+//         resultado.scrollIntoView({ behavior: "smooth" }); // Ensure the table is in view after updating
+//     },
+//     error: function(planXhr, planStatus, planError) {
+//         console.error("Error fetching plan quote value", planError);
+//     }
+//   });
+// }    
     ${
       referenciaHistorico &&
       `

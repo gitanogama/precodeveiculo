@@ -178,7 +178,9 @@ async function loadVeiculo() {
     console.log("loadVeiculo error", err);
   }
 }
-
+function formatPrice(value) {
+  return value.replace("R$", "").replace(/\./g, "").replace(",", ".");
+}
 function renderVeiculo(data) {
   const {
     MesReferencia,
@@ -191,6 +193,7 @@ function renderVeiculo(data) {
   } = data;
 
   const AnoModelo = data.AnoModelo === 32000 ? "Zero KM" : data.AnoModelo;
+  const formattedPrice = formatPrice(Valor); // Usando a função para formatar o preço
 
   const result = `
     <table width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -229,11 +232,11 @@ function renderVeiculo(data) {
         </tr>
         <tr>
           <td>Preço FIXO</td>
-          <td></td>
+          <td>${formattedPrice}</td>
         </tr>
         <tr>
           <td>Preço VARIÁVEL</td>
-          <td></td>
+          <td>${formattedPrice}</td>
         </tr>
       </tbody>
     </table>

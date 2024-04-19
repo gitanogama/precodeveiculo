@@ -239,10 +239,7 @@ function renderVeiculo(data) {
           <td id="preco-plano-2"></td>
         </tr>
       </tbody>
-    </table>  
-
-resultado.innerHTML = result;
- 
+  </table>
     ${
       referenciaHistorico &&
       `

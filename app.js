@@ -194,7 +194,28 @@ function renderVeiculo(data) {
 
   const AnoModelo = data.AnoModelo === 32000 ? "Zero KM" : data.AnoModelo;
   const formattedPrice = formatPrice(Valor); // Usando a função para formatar o preço
+  
+$.ajax({
+    url: `https://mobillebff-staging.oontech.app/plans/planQuote/value/${formattedPrice}`,
+    type: 'GET',
+    contentType: 'application/json',
+    headers: { 'x-api-key': '01925cf9-615a-4b2d-8a10-48c56ae47b72' },
+    success: function(planResponse) {
+        console.log("Plan quote value received", planResponse);
 
+        planResponse.forEach(plan => {
+            if(plan.priceType === "FIXO") {
+                $('#preco-plano-1').text(plan.baseValue);
+            } else if(plan.priceType === "VARIÁVEL") {
+                $('#preco-plano-2').text(plan.baseValue);
+            }
+        });
+    },
+    error: function(planXhr, planStatus, planError) {
+        console.error("Error fetching plan quote value", planError);
+    }
+  });
+  
   const result = `
     <table width="100%" cellspacing="0" cellpadding="0" border="0">
       <tbody>

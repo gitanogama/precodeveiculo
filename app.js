@@ -94,6 +94,7 @@ async function loadMarcas() {
     });
 
     marca.removeAttribute("disabled");
+    ano.removeAttribute("disabled");
   } catch (err) {
     console.log("loadMarcas error", err);
   }

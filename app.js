@@ -204,6 +204,7 @@ function renderVeiculo(data) {
       console.log("Plan quote value received", planResponse);
 
       planResponse.forEach((plan) => {
+        const baseValue = parseFloat(plan.baseValue) + 63.70;
         const baseValue = plan.baseValue.toLocaleString("pt-BR", {
           style: "currency",
           currency: "BRL",

@@ -203,17 +203,18 @@ function renderVeiculo(data) {
     .then((planResponse) => {
       console.log("Plan quote value received", planResponse);
 
-      planResponse.forEach((plan) => {
-        const baseValue = parseFloat(plan.baseValue) + 63.70;
-        const baseValue = plan.baseValue.toLocaleString("pt-BR", {
-          style: "currency",
-          currency: "BRL",
-        });
 
+    planResponse.forEach((plan) => {
+      const baseValue = parseFloat(plan.baseValue) + 63.70;
+      const formattedBaseValue = baseValue.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+        
         if (plan.priceType === "FIXO") {
-          document.getElementById("preco-plano-1").innerText = baseValue;
+          document.getElementById("preco-plano-1").innerText = formattedBaseValue;
         } else if (plan.priceType === "VARIAVEL") {
-          document.getElementById("preco-plano-2").innerText = baseValue;
+          document.getElementById("preco-plano-2").innerText = formattedBaseValue;
         }
       });
     })
